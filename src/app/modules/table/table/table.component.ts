@@ -16,16 +16,16 @@ export class TableComponent implements OnInit {
   constructor(private dataService: DataService) { }
 
   ngOnInit() {
-    return this.dataService.getTable().subscribe(data => this.tableData = data);
+    return this.dataService.getTable('').subscribe(data => this.tableData = data);
   }
 
   UpdateTableTitle() {
     if (this.titleOrderAsc) {
       this.titleOrderAsc = false;
-      return this.dataService.getTableTitleDesc().subscribe(data => this.tableData = data);
+      return this.dataService.getTable('?sort=title,desc').subscribe(data => this.tableData = data);
     } else {
       this.titleOrderAsc = true;
-      return this.dataService.getTableTitleAsc().subscribe(data => this.tableData = data);
+      return this.dataService.getTable('?sort=title,asc').subscribe(data => this.tableData = data);
     }
   }
 

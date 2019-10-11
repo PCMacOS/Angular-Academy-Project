@@ -8,20 +8,11 @@ import { Table } from './table.model';
 export class DataService {
 
   apiUrlRegular = 'https://bug-report-system-server.herokuapp.com/bugs';
-  apiUrlTitleDesc = 'https://bug-report-system-server.herokuapp.com/bugs?sort=title,desc';
-  apiUrlTitleAsc = 'https://bug-report-system-server.herokuapp.com/bugs?sort=title,asc';
 
   constructor(private _http: HttpClient) { }
 
-  getTable() {
-    return this._http.get<Table[]>(this.apiUrlRegular);
+  getTable(attributes: string) {
+    return this._http.get<Table[]>(this.apiUrlRegular + attributes);
   }
 
-  getTableTitleDesc() {
-    return this._http.get<Table[]>(this.apiUrlTitleDesc);
-  }
-
-  getTableTitleAsc() {
-    return this._http.get<Table[]>(this.apiUrlTitleAsc);
-  }
 }
