@@ -8,7 +8,10 @@
         <span class="badge badge-primary" *ngIf="titleOrderAsc">Asc</span>
         <span span class="badge badge-primary" *ngIf="titleOrderAsc === false">Desc</span>
       </th>
-      <th scope="col">Priority</th>
+      <th (click)="UpdateTablePriority()" scope="col">Priority
+        <span class="badge badge-primary" *ngIf="priorityOrderAsc">Asc</span>
+        <span span class="badge badge-primary" *ngIf="priorityOrderAsc === false">Desc</span>
+      </th>
       <th scope="col">Reporter</th>
       <th scope="col">Date Created</th>
       <th scope="col">Status</th>
