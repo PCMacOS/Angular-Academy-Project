@@ -5,6 +5,9 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { TableModule } from './modules/table/table.module';
 
+import { HttpClientModule } from '@angular/common/http'
+import { DataService } from './modules/table/table/data.service';
+
 @NgModule({
   declarations: [
     AppComponent
@@ -12,9 +15,10 @@ import { TableModule } from './modules/table/table.module';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    TableModule
+    TableModule,
+    HttpClientModule
   ],
-  providers: [],
+  providers: [DataService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
