@@ -16,7 +16,6 @@ export class TableComponent implements OnInit {
   constructor(private dataService: DataService) { }
 
   ngOnInit() {
-    this.titleOrderAsc = true;
     return this.dataService.getTable().subscribe(data => this.tableData = data);
   }
 

@@ -6,7 +6,7 @@
       <th scope="col">#</th>
       <th (click)="UpdateTableTitle()" scope="col">Title
         <span class="badge badge-primary" *ngIf="titleOrderAsc">Asc</span>
-        <span span class="badge badge-primary" *ngIf="!titleOrderAsc">Desc</span>
+        <span span class="badge badge-primary" *ngIf="titleOrderAsc === false">Desc</span>
       </th>
       <th scope="col">Priority</th>
       <th scope="col">Reporter</th>
