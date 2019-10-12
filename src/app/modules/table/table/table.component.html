@@ -1,0 +1,38 @@
+<table class="table thead-light shadow">
+  <thead class="table-dark text-center">
+    <tr>
+      <th (click)="ngOnInit()" scope="col">#</th>
+      <th (click)="UpdateTableTitle()" scope="col">Title
+        <span class="badge badge-primary" *ngIf="titleOrderAsc">Asc</span>
+        <span span class="badge badge-primary" *ngIf="titleOrderAsc === false">Desc</span>
+      </th>
+      <th (click)="UpdateTablePriority()" scope="col">Priority
+        <span class="badge badge-primary" *ngIf="priorityOrderAsc">Asc</span>
+        <span span class="badge badge-primary" *ngIf="priorityOrderAsc === false">Desc</span>
+      </th>
+      <th (click)="UpdateTableReporter()" scope="col">Reporter
+          <span class="badge badge-primary" *ngIf="reporterOrderAsc">Asc</span>
+          <span span class="badge badge-primary" *ngIf="reporterOrderAsc === false">Desc</span>
+      </th>
+      <th (click)="UpdateTableDateCreated()"scope="col">Date Created
+          <span class="badge badge-primary" *ngIf="dateCreatedOrderAsc">Asc</span>
+          <span span class="badge badge-primary" *ngIf="dateCreatedOrderAsc === false">Desc</span>
+      </th>
+      <th (click)="UpdateTableStatus()"scope="col">Status
+          <span class="badge badge-primary" *ngIf="statusOrderAsc">Asc</span>
+          <span span class="badge badge-primary" *ngIf="statusOrderAsc === false">Desc</span>
+      </th>
+    </tr>
+  </thead>
+  <tbody class="text-center">
+
+    <tr *ngFor="let item of tableData; let i = index">
+      <th scope="row">{{i+1}}</th>
+      <td>{{item.title}}</td>
+      <td>{{item.priority}}</td>
+      <td>{{item.reporter}}</td>
+      <td>{{item.createdAt}}</td>
+      <td>{{item.status}}</td>
+    </tr>
+  </tbody>
+</table>
