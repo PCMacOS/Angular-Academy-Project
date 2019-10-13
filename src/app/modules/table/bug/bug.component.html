@@ -1,0 +1,30 @@
+<button class="btn btn-info" routerLink ='/'>Back to Home</button>
+<p>bug works!</p>
+
+<h2>Add a Bug</h2>
+<br>
+<form [formGroup] = "myForm" (submit) = 'formSubmit (myForm)'>
+    <div>
+      <label>Title: </label> <br>
+       <input formControlName="title" type="text">
+      </div>
+    <div>
+      <label>Description: </label> <br>
+       <input formControlName="description" type="text">
+      </div>
+      <div>
+          <label>Priority: </label> <br>
+           <input formControlName="priority" type="text">
+      </div>
+      <div>
+          <label>Reporter: </label> <br>
+           <input formControlName="reporter" type="text">
+      </div>
+      <div>
+          <label>Status: </label> <br>
+          <input formControlName="status" type="text">
+      </div> <br>
+     <button  type="submit">Submit</button> <br>
+     <br>
+
+</form>
