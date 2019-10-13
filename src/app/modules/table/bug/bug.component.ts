@@ -12,6 +12,16 @@ export class BugComponent implements OnInit {
 
   constructor() { }
   myForm: FormGroup;
+  topics = [ 'Minor',  'Major',  'Critical' ];
+  topicHasError = true;
+
+  validateTopic(value) {
+    if ( value === 'default' ) {
+      this.topicHasError = true;
+    } else {
+      this.topicHasError = false;
+    }
+  }
 
   ngOnInit() {
     this.myForm = new FormGroup({

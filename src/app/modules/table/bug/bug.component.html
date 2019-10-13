@@ -13,9 +13,14 @@
        <input formControlName="description" type="text">
       </div>
       <div>
-          <label>Priority: </label> <br>
-           <input formControlName="priority" type="text">
-      </div>
+        <br> <label>Priority: </label>
+          <select (blur) = 'validateTopic(topic.value)' (change)= 'validateTopic(topic.value)' [class.is-invalid] = "topicHasError &&  topic.touched" class = "custom-select" name="topic">
+            <option value="default">Choose Priority</option>
+            <option *ngFor="let topic of topics">{{ topic }}</option>
+          </select>
+          <small class="text-danger" [class.d-none]="!topicHasError || topic.untouched">Please Choose a topic</small>
+
+      </div><br>
       <div>
           <label>Reporter: </label> <br>
            <input formControlName="reporter" type="text">
