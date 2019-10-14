@@ -6,3 +6,9 @@ export class Table {
   createdAt: string;
   status: string;
 }
+
+export class ContactRequest {
+  mydata: Table;
+  requestType: any = '';
+  text = '';
+}

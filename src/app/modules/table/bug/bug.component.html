@@ -1,35 +1,45 @@
 <button class="btn btn-info" routerLink ='/'>Back to Home</button>
-<p>bug works!</p>
 
-<h2>Add a Bug</h2>
+
+<h2>Add a Bug:</h2>
 <br>
-<form [formGroup] = "myForm" (submit) = 'formSubmit (myForm)'>
+<form [formGroup] = "myForm" (ngSubmit) = 'onSubmit()' novalidate>
     <div>
       <label>Title: </label> <br>
        <input formControlName="title" type="text">
       </div>
     <div>
       <label>Description: </label> <br>
-       <input formControlName="description" type="text">
-      </div>
-      <div>
-        <br> <label>Priority: </label>
-          <select (blur) = 'validateTopic(topic.value)' (change)= 'validateTopic(topic.value)' [class.is-invalid] = "topicHasError &&  topic.touched" class = "custom-select" name="topic">
-            <option value="default">Choose Priority</option>
-            <option *ngFor="let topic of topics">{{ topic }}</option>
-          </select>
-          <small class="text-danger" [class.d-none]="!topicHasError || topic.untouched">Please Choose a topic</small>
+      <input formControlName="description" type="text">
+    </div>
 
-      </div><br>
-      <div>
-          <label>Reporter: </label> <br>
-           <input formControlName="reporter" type="text">
-      </div>
-      <div>
+    <div>
+      <br> <label>Priority: </label>
+      <select formControlName="priority">
+        <option *ngFor="let topic of topics" [value]="topic">{{topic}}</option>
+      </select>
+    </div><br>
+
+
+    <div>
+        <br>  <label>Reporter: </label>
+           <select formControlName="reporter">
+              <option *ngFor="let rep of reporters" [value]="rep">{{rep}}</option>
+            </select>
+     </div>
+
+     <div>
           <label>Status: </label> <br>
-          <input formControlName="status" type="text">
-      </div> <br>
-     <button  type="submit">Submit</button> <br>
+          <select formControlName="status">
+              <option *ngFor="let stat of statusoptions" [value]="stat">{{stat}}</option>
+              </select>
+      </div>
+       <br>
+
+     <button  type="submit" [disabled]="myForm.pristine">Add Bug</button> <br>
+     <button type="reset" (click)="revert()" [disabled]="myForm.pristine">
+        Revert
+      </button>
      <br>
 
 </form>
