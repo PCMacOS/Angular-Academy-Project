@@ -1,14 +1,11 @@
 export class Table {
   id: string;
   title: string;
-  priority: string;
+  description: string;
+  priority: number;
   reporter: string;
-  createdAt: string;
   status: string;
-}
-
-export class ContactRequest {
-  mydata: Table;
-  requestType: any = '';
-  text = '';
-}
+  createdAt: string;
+  updatedAt: string;
+ // userComments: UserComments[];
+ }

@@ -3,43 +3,51 @@
 
 <h2>Add a Bug:</h2>
 <br>
-<form [formGroup] = "myForm" (ngSubmit) = 'onSubmit()' novalidate>
-    <div>
-      <label>Title: </label> <br>
-       <input formControlName="title" type="text">
-      </div>
-    <div>
-      <label>Description: </label> <br>
-      <input formControlName="description" type="text">
+<form [formGroup]="myForm" (ngSubmit)="Onsubmit()"  [class.was-validated]="myForm.invalid && myForm.dirty" >
+    <div [ngClass]="{'has-error': myForm.get('title').invalid && myForm.get('title').dirty}">
+      <label>Title</label>
+    <input formControlName="title" type="text">
+    <div *ngIf="myForm.get('title').invalid && myForm.get('title').dirty" >
+     Field is required
     </div>
+   </div>
+
+      <div [ngClass]="{'has-error': myForm.get('description').invalid && myForm.get('description').dirty}">
+          <label>Description</label>
+        <input formControlName="description" type="text">
+        <div *ngIf="myForm.get('description').invalid && myForm.get('description').dirty" >
+         Field is required
+        </div>
+       </div>
 
     <div>
       <br> <label>Priority: </label>
-      <select formControlName="priority">
-        <option *ngFor="let topic of topics" [value]="topic">{{topic}}</option>
+      <select formControlName="priority" id='priority'>
+        <option [ngValue]="null">Select Priority</option>
+        <option *ngFor="let topic of topics" [value]="topic.id">{{topic.name}}</option>
       </select>
-    </div><br>
+    </div>
 
 
     <div>
         <br>  <label>Reporter: </label>
-           <select formControlName="reporter">
-              <option *ngFor="let rep of reporters" [value]="rep">{{rep}}</option>
+           <select formControlName="reporter" id='reporter'>
+              <option [ngValue]="null">Select Reporter</option>
+              <option *ngFor="let rep of reporters" [value]="rep.id">{{rep.name}}</option>
             </select>
      </div>
 
      <div>
-          <label>Status: </label> <br>
-          <select formControlName="status">
-              <option *ngFor="let stat of statusoptions" [value]="stat">{{stat}}</option>
+          <br><label>Status: </label>
+          <select formControlName="status" id='status'>
+              <option [ngValue]="null">Select Status</option>
+              <option *ngFor="let stat of statusoptions" [value]="stat.id">{{stat.name}}</option>
               </select>
       </div>
        <br>
 
-     <button  type="submit" [disabled]="myForm.pristine">Add Bug</button> <br>
-     <button type="reset" (click)="revert()" [disabled]="myForm.pristine">
-        Revert
-      </button>
+     <button  type="submit" value = "Onsubmit">Add Bug</button>
+     <br>
      <br>
 
 </form>
