@@ -16,7 +16,7 @@ export class BugComponent implements OnInit {
 
   constructor(private dataService: DataService, private router: Router, private formBuilder: FormBuilder) { }
 
-  myForm: FormGroup;
+  public myForm: FormGroup;
   topics  = [
     {id: 0, name: 'Minor'},
     {id: 1, name: 'Major'},

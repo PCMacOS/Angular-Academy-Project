@@ -33,7 +33,7 @@
         <br>  <label>Reporter: </label>
            <select formControlName="reporter" id='reporter'>
               <option [ngValue]="null">Select Reporter</option>
-              <option *ngFor="let rep of reporters" [value]="rep.id">{{rep.name}}</option>
+              <option *ngFor="let rep of reporters" [value]="rep.name">{{rep.name}}</option>
             </select>
      </div>
 
@@ -41,7 +41,7 @@
           <br><label>Status: </label>
           <select formControlName="status" id='status'>
               <option [ngValue]="null">Select Status</option>
-              <option *ngFor="let stat of statusoptions" [value]="stat.id">{{stat.name}}</option>
+              <option *ngFor="let stat of statusoptions" [value]="stat.name">{{stat.name}}</option>
               </select>
       </div>
        <br>

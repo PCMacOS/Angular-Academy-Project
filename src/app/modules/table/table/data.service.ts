@@ -20,4 +20,9 @@ export class DataService {
     return this.myhttp.post(this.apiUrlRegular, bug );
   }
 
+  deletebug(id: number) {
+    return this.myhttp.delete(this.apiUrlRegular + '/' + id);
+
+  }
+
 }

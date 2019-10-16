@@ -98,4 +98,9 @@ export class TableComponent implements OnInit {
     }
   }
 
+  Ondelete(tabledata2: Table) {
+    this.dataService.deletebug(tabledata2.id);
+ }
+
+
 }

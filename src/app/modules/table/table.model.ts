@@ -1,5 +1,5 @@
 export class Table {
-  id: string;
+  id: number;
   title: string;
   description: string;
   priority: number;
