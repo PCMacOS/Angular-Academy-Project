@@ -5,4 +5,5 @@ export class Table {
   reporter: string;
   createdAt: string;
   status: string;
+  description: string;
 }

@@ -36,7 +36,7 @@
               <td>{{item.reporter}}</td>
               <td>{{item.createdAt}}</td>
               <td>{{item.status}}</td>
-              <td><button type="button" class="btn btn-warning">Edit</button><button (click)="DeleteBugs(item.id, i)" type="button" class="btn btn-danger" style="margin-left: 5pt">Delete</button></td>
+              <td><button type="button" (click)="EditBugs(item.id)" class="btn btn-warning">Edit</button><button (click)="DeleteBugs(item.id, i)" type="button" class="btn btn-danger" style="margin-left: 5pt">Delete</button></td>
             </ng-template>
           </tr>
         </tbody>

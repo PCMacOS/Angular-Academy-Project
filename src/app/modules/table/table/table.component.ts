@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Table } from './table.model';
 import { DataService } from './data.service';
+import { Router } from '@angular/router';
 
 @Component({
   // tslint:disable-next-line: component-selector
@@ -17,7 +18,7 @@ export class TableComponent implements OnInit {
   dateCreatedOrderAsc: boolean;
   statusOrderAsc: boolean;
 
-  constructor(private dataService: DataService) { }
+  constructor(private dataService: DataService, private router: Router) { }
 
   ngOnInit() {
     this.priorityOrderAsc = null;
@@ -35,6 +36,10 @@ export class TableComponent implements OnInit {
     });
     delete this.tableData[index];
   }
+  }
+
+  EditBugs(id: string){
+    this.router.navigate(['post', id]);
   }
 
   UpdateTableTitle() {

@@ -19,7 +19,7 @@
     <div class="form-group">
       <label>Priority</label>
       <select class="form-control" formControlName="priority">
-          <option class="dropdown-item" *ngFor="let priority of priority">{{priority.name}}</option>
+          <option class="dropdown-item"  *ngFor="let priority of priority" [value]="priority.id">{{priority.name}}</option>
       </select>
     </div>
 

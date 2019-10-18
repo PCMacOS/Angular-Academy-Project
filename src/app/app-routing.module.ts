@@ -6,6 +6,7 @@ import { PostFormComponent } from './modules/table/post-form/post-form.component
 
 const routes: Routes = [
   { path: '', component: TableComponent },
+  { path: 'post/:id',      component: PostFormComponent },
   { path: 'post',      component: PostFormComponent }
 ];
 

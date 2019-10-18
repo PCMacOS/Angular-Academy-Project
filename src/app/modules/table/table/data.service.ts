@@ -24,4 +24,7 @@ export class DataService {
     return this._http.delete(this.apiUrlRegular + '/' + id);
   }
 
+  updateBugs(id: string, bug: Table) {
+    return this._http.put(this.apiUrlRegular + '/' + id, bug);
+  }
 }
