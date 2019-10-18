@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { DataService } from '../table/data.service';
 
 @Component({
   selector: 'angularAcademyProject-post-form',
@@ -10,9 +11,13 @@ export class PostFormComponent implements OnInit {
 
   status: any = ['Ready for test', 'Done', 'Rejected'];
   reporter: any = ['QA', 'PO', 'DEV'];
-  priority: any = ['Minor', 'Major', 'Critical'];
+  priority: any = [
+    { id: 0, name : 'Minor'},
+    { id: 1, name : 'Major'},
+    { id: 2, name : 'Critical'}
+  ];
   postForm: FormGroup;
-  constructor() { }
+  constructor(private dataService: DataService) { }
 
   ngOnInit() {
     this.postForm = new FormGroup({
@@ -20,12 +25,13 @@ export class PostFormComponent implements OnInit {
       description: new FormControl('', Validators.required),
       priority: new FormControl('', Validators.required),
       reporter: new FormControl('', Validators.required),
-      status: new FormControl('', Validators.required),
+      status: new FormControl('', Validators.required)
     });
   }
 
   onSubmit(){
     console.log(this.postForm.value);
+    this.dataService.createbugs(this.postForm.value).subscribe();
   }
 
 }
