@@ -12,8 +12,16 @@ import { Table } from '../table/table.model';
 export class PostFormComponent implements OnInit {
 
   editFlag: boolean
-  status: any = ['Ready for test', 'Done', 'Rejected'];
-  reporter: any = ['QA', 'PO', 'DEV'];
+  status: any = [
+    { id: 'Ready for test', name : 'Ready for test'},
+    { id: 'Done', name : 'Done'},
+    { id: 'Rejected', name : 'Rejected'}
+  ];
+  reporter: any = [
+    { id: 'QA', name : 'QA'},
+    { id: 'PO', name : 'PO'},
+    { id: 'DEV', name : 'DEV'}
+  ];
   priority: any = [
     { id: 1, name : 'Minor'},
     { id: 2, name : 'Major'},
