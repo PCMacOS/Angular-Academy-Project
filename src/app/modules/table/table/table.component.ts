@@ -20,9 +20,20 @@ export class TableComponent implements OnInit {
   dateCreatedOrderAsc: boolean;
   statusOrderAsc: boolean;
 
-  status: any = ['Ready for test', 'Done', 'Rejected'];
-  reporter: any = ['QA', 'PO', 'DEV'];
+  status: any = [
+    { id: '', name : 'All'},
+    { id: 'Ready for test', name : 'Ready for test'},
+    { id: 'Done', name : 'Done'},
+    { id: 'Rejected', name : 'Rejected'}
+  ];
+  reporter: any = [
+    { id: '', name : 'All'},
+    { id: 'QA', name : 'QA'},
+    { id: 'PO', name : 'PO'},
+    { id: 'DEV', name : 'DEV'}
+  ];
   priority: any = [
+    { id: '', name : 'All'},
     { id: 1, name : 'Minor'},
     { id: 2, name : 'Major'},
     { id: 3, name : 'Critical'}
@@ -58,7 +69,11 @@ export class TableComponent implements OnInit {
 
   onSubmit() {
     console.log(this.shearchForm.value);
-
+    return this.dataService.getTable(
+      '?title=' + this.shearchForm.value.title + '&priority=' +
+      this.shearchForm.value.priority + '&reporter=' +
+      this.shearchForm.value.reporter + '&status=' + this.shearchForm.value.status
+      ).subscribe(data => this.tableData = data);
   }
 
   EditBugs(id: string) {

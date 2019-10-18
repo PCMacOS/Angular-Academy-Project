@@ -42,7 +42,7 @@ export class PostFormComponent implements OnInit {
     });
   }
 
-  onSubmit(){
+  onSubmit() {
     console.log(this.postForm.value);
     if (!this.editFlag) { this.dataService.createbugs(this.postForm.value).subscribe(); }
     else { this.dataService.updateBugs(this.bugId, this.postForm.value).subscribe(); }
