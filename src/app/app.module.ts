@@ -3,6 +3,11 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { TableModule } from './modules/table/table.module';
+
+import { HttpClientModule } from '@angular/common/http';
+import { DataService } from './modules/table/table/data.service';
+import { PostFormComponent } from './modules/table/post-form/post-form.component';
 
 @NgModule({
   declarations: [
@@ -10,9 +15,11 @@ import { AppComponent } from './app.component';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    TableModule,
+    HttpClientModule
   ],
-  providers: [],
+  providers: [DataService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
