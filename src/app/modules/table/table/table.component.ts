@@ -28,6 +28,15 @@ export class TableComponent implements OnInit {
     return this.dataService.getTable('').subscribe(data => this.tableData = data);
   }
 
+  DeleteBugs(id: string, index: number){
+    if (confirm('Are you sure you want to delete this?')) {
+    this.dataService.deleteBugs(id).subscribe((ret) => {
+          console.log('Bug deleted: ', ret);
+    });
+    delete this.tableData[index];
+  }
+  }
+
   UpdateTableTitle() {
     this.priorityOrderAsc = null;
     this.reporterOrderAsc = null;

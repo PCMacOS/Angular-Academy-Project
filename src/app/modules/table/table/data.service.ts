@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Table } from './table.model';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -13,6 +14,14 @@ export class DataService {
 
   getTable(attributes: string) {
     return this._http.get<Table[]>(this.apiUrlRegular + attributes);
+  }
+
+  createbugs(bug: Table): Observable<any> {
+    return this._http.post(this.apiUrlRegular, bug );
+  }
+
+  deleteBugs(id: string) {
+    return this._http.delete(this.apiUrlRegular + '/' + id);
   }
 
 }

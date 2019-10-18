@@ -23,17 +23,21 @@
                 <span class="badge badge-primary" *ngIf="statusOrderAsc">Asc</span>
                 <span span class="badge badge-primary" *ngIf="statusOrderAsc === false">Desc</span>
             </th>
+            <th (click)="UpdateTableStatus()"scope="col">Action</th>
           </tr>
         </thead>
         <tbody class="text-center">
 
           <tr *ngFor="let item of tableData; let i = index">
-            <th scope="row">{{i+1}}</th>
-            <td>{{item.title}}</td>
-            <td>{{item.priority}}</td>
-            <td>{{item.reporter}}</td>
-            <td>{{item.createdAt}}</td>
-            <td>{{item.status}}</td>
+            <ng-template [ngIf]="tableData[i] != null">
+              <th scope="row">{{i+1}}</th>
+              <td>{{item.title}}</td>
+              <td>{{item.priority}}</td>
+              <td>{{item.reporter}}</td>
+              <td>{{item.createdAt}}</td>
+              <td>{{item.status}}</td>
+              <td><button type="button" class="btn btn-warning">Edit</button><button (click)="DeleteBugs(item.id, i)" type="button" class="btn btn-danger" style="margin-left: 5pt">Delete</button></td>
+            </ng-template>
           </tr>
         </tbody>
       </table>
