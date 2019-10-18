@@ -66,4 +66,13 @@ export class PostFormComponent implements OnInit {
     });
   }
 
+  confirm() {
+    if (this.postForm.dirty) {
+      return confirm('Are you sure you want to leave this page?');
+    }
+    else {
+      return true;
+    }
+ }
+
 }
