@@ -11,7 +11,7 @@ import { Table } from '../table/table.model';
 })
 export class PostFormComponent implements OnInit {
 
-  editFlag: boolean
+  editFlag: boolean;
   status: any = [
     { id: 'Ready for test', name : 'Ready for test'},
     { id: 'Done', name : 'Done'},
@@ -28,10 +28,12 @@ export class PostFormComponent implements OnInit {
     { id: 3, name : 'Critical'}
   ];
   postForm: FormGroup;
+  submitFlag;
   bugId: any;
   constructor(private dataService: DataService, private route: ActivatedRoute, private router: Router) { }
 
   ngOnInit() {
+    this.submitFlag = false;
     this.editFlag = false;
     this.postForm = new FormGroup({
       title: new FormControl('', Validators.required),
@@ -54,6 +56,7 @@ export class PostFormComponent implements OnInit {
     console.log(this.postForm.value);
     if (!this.editFlag) { this.dataService.createbugs(this.postForm.value).subscribe(); }
     else { this.dataService.updateBugs(this.bugId, this.postForm.value).subscribe(); }
+    this.submitFlag = true;
     this.router.navigate(['']);
   }
 
@@ -75,7 +78,7 @@ export class PostFormComponent implements OnInit {
   }
 
   confirm() {
-    if (this.postForm.dirty) {
+    if (this.postForm.dirty && !this.submitFlag) {
       return confirm('Are you sure you want to leave this page?');
     }
     else {
