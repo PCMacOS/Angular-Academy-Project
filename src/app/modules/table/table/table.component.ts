@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Table } from './table.model';
 import { DataService } from './data.service';
+import { Router } from '@angular/router';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 @Component({
   // tslint:disable-next-line: component-selector
@@ -11,13 +13,33 @@ import { DataService } from './data.service';
 export class TableComponent implements OnInit {
 
   tableData: Table[];
+  shearchForm: FormGroup;
   titleOrderAsc: boolean;
   priorityOrderAsc: boolean;
   reporterOrderAsc: boolean;
   dateCreatedOrderAsc: boolean;
   statusOrderAsc: boolean;
 
-  constructor(private dataService: DataService) { }
+  status: any = [
+    { id: '', name : 'All'},
+    { id: 'Ready for test', name : 'Ready for test'},
+    { id: 'Done', name : 'Done'},
+    { id: 'Rejected', name : 'Rejected'}
+  ];
+  reporter: any = [
+    { id: '', name : 'All'},
+    { id: 'QA', name : 'QA'},
+    { id: 'PO', name : 'PO'},
+    { id: 'DEV', name : 'DEV'}
+  ];
+  priority: any = [
+    { id: '', name : 'All'},
+    { id: 1, name : 'Minor'},
+    { id: 2, name : 'Major'},
+    { id: 3, name : 'Critical'}
+  ];
+
+  constructor(private dataService: DataService, private router: Router) { }
 
   ngOnInit() {
     this.priorityOrderAsc = null;
@@ -25,7 +47,37 @@ export class TableComponent implements OnInit {
     this.dateCreatedOrderAsc = null;
     this.statusOrderAsc = null;
     this.titleOrderAsc = null;
+
+    this.shearchForm = new FormGroup({
+      title: new FormControl(''),
+      priority: new FormControl(''),
+      reporter: new FormControl(''),
+      status: new FormControl('')
+    });
+
     return this.dataService.getTable('').subscribe(data => this.tableData = data);
+  }
+
+  DeleteBugs(id: string, index: number){
+    if (confirm('Are you sure you want to delete this?')) {
+    this.dataService.deleteBugs(id).subscribe((ret) => {
+          console.log('Bug deleted: ', ret);
+    });
+    delete this.tableData[index];
+  }
+  }
+
+  onSubmit() {
+    console.log(this.shearchForm.value);
+    return this.dataService.getTable(
+      '?title=' + this.shearchForm.value.title + '&priority=' +
+      this.shearchForm.value.priority + '&reporter=' +
+      this.shearchForm.value.reporter + '&status=' + this.shearchForm.value.status
+      ).subscribe(data => this.tableData = data);
+  }
+
+  EditBugs(id: string) {
+    this.router.navigate(['post', id]);
   }
 
   UpdateTableTitle() {

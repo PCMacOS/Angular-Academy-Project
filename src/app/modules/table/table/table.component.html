@@ -1,38 +1,77 @@
-<table class="table thead-light shadow">
-  <thead class="table-dark text-center">
-    <tr>
-      <th (click)="ngOnInit()" scope="col">#</th>
-      <th (click)="UpdateTableTitle()" scope="col">Title
-        <span class="badge badge-primary" *ngIf="titleOrderAsc">Asc</span>
-        <span span class="badge badge-primary" *ngIf="titleOrderAsc === false">Desc</span>
-      </th>
-      <th (click)="UpdateTablePriority()" scope="col">Priority
-        <span class="badge badge-primary" *ngIf="priorityOrderAsc">Asc</span>
-        <span span class="badge badge-primary" *ngIf="priorityOrderAsc === false">Desc</span>
-      </th>
-      <th (click)="UpdateTableReporter()" scope="col">Reporter
-          <span class="badge badge-primary" *ngIf="reporterOrderAsc">Asc</span>
-          <span span class="badge badge-primary" *ngIf="reporterOrderAsc === false">Desc</span>
-      </th>
-      <th (click)="UpdateTableDateCreated()"scope="col">Date Created
-          <span class="badge badge-primary" *ngIf="dateCreatedOrderAsc">Asc</span>
-          <span span class="badge badge-primary" *ngIf="dateCreatedOrderAsc === false">Desc</span>
-      </th>
-      <th (click)="UpdateTableStatus()"scope="col">Status
-          <span class="badge badge-primary" *ngIf="statusOrderAsc">Asc</span>
-          <span span class="badge badge-primary" *ngIf="statusOrderAsc === false">Desc</span>
-      </th>
-    </tr>
-  </thead>
-  <tbody class="text-center">
+<div class="row">
+    <form [formGroup]="shearchForm" (ngSubmit)="onSubmit()">
+        <div class="form-row">
+            <div class="col-4">
+                <label>Title</label>
+                <input formControlName="title" class="form-control" type="text">
+            </div>
+            <div class="col-2">
+                <label>Priority</label>
+                <select class="form-control" formControlName="priority">
+                    <option class="dropdown-item"  *ngFor="let priority of priority" [value]="priority.id">{{priority.name}}</option>
+                </select>
+            </div>
+            <div class="col-2">
+                <label>Reporter</label>
+                <select class="form-control" formControlName="reporter">
+                    <option class="dropdown-item" *ngFor="let reporter of reporter" [value]="reporter.id">{{reporter.name}}</option>
+                </select>
+            </div>
+            <div class="col-3">
+                <label for="exampleFormControlSelect1">Status</label>
+                <select class="form-control" formControlName="status">
+                    <option class="dropdown-item" *ngFor="let status of status" [value]="status.id">{{status.name}}</option>
+                </select>
+            </div>
+            <div class="col-1">
+                <label ></label>
+                <button class="btn btn-success" style="margin-top: 5pt;">Search</button>
+            </div>
+          </div>
+      </form>
+</div>
+<br>
+<div class="row">
+    <table class="table thead-light shadow">
+        <thead class="table-dark text-center">
+          <tr>
+            <th (click)="ngOnInit()" scope="col">#</th>
+            <th (click)="UpdateTableTitle()" scope="col">Title
+              <span class="badge badge-primary" *ngIf="titleOrderAsc">Asc</span>
+              <span span class="badge badge-primary" *ngIf="titleOrderAsc === false">Desc</span>
+            </th>
+            <th (click)="UpdateTablePriority()" scope="col">Priority
+              <span class="badge badge-primary" *ngIf="priorityOrderAsc">Asc</span>
+              <span span class="badge badge-primary" *ngIf="priorityOrderAsc === false">Desc</span>
+            </th>
+            <th (click)="UpdateTableReporter()" scope="col">Reporter
+                <span class="badge badge-primary" *ngIf="reporterOrderAsc">Asc</span>
+                <span span class="badge badge-primary" *ngIf="reporterOrderAsc === false">Desc</span>
+            </th>
+            <th (click)="UpdateTableDateCreated()"scope="col">Date Created
+                <span class="badge badge-primary" *ngIf="dateCreatedOrderAsc">Asc</span>
+                <span span class="badge badge-primary" *ngIf="dateCreatedOrderAsc === false">Desc</span>
+            </th>
+            <th (click)="UpdateTableStatus()"scope="col">Status
+                <span class="badge badge-primary" *ngIf="statusOrderAsc">Asc</span>
+                <span span class="badge badge-primary" *ngIf="statusOrderAsc === false">Desc</span>
+            </th>
+            <th (click)="UpdateTableStatus()"scope="col">Action</th>
+          </tr>
+        </thead>
+        <tbody class="text-center">
 
-    <tr *ngFor="let item of tableData; let i = index">
-      <th scope="row">{{i+1}}</th>
-      <td>{{item.title}}</td>
-      <td>{{item.priority}}</td>
-      <td>{{item.reporter}}</td>
-      <td>{{item.createdAt}}</td>
-      <td>{{item.status}}</td>
-    </tr>
-  </tbody>
-</table>
+          <tr *ngFor="let item of tableData; let i = index">
+            <ng-template [ngIf]="tableData[i] != null">
+              <th scope="row">{{i+1}}</th>
+              <td>{{item.title}}</td>
+              <td>{{item.priority}}</td>
+              <td>{{item.reporter}}</td>
+              <td>{{item.createdAt}}</td>
+              <td>{{item.status}}</td>
+              <td><button type="button" (click)="EditBugs(item.id)" class="btn btn-warning">Edit</button><button (click)="DeleteBugs(item.id, i)" type="button" class="btn btn-danger" style="margin-left: 5pt">Delete</button></td>
+            </ng-template>
+          </tr>
+        </tbody>
+      </table>
+</div>
