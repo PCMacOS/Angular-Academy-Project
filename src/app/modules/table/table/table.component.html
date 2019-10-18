@@ -1,4 +1,37 @@
 <div class="row">
+    <form [formGroup]="shearchForm" (ngSubmit)="onSubmit()">
+        <div class="form-row">
+            <div class="col-4">
+                <label>Title</label>
+                <input formControlName="title" class="form-control" type="text">
+            </div>
+            <div class="col-2">
+                <label>Priority</label>
+                <select class="form-control" formControlName="priority">
+                    <option class="dropdown-item"  *ngFor="let priority of priority" [value]="priority.id">{{priority.name}}</option>
+                </select>
+            </div>
+            <div class="col-2">
+                <label>Reporter</label>
+                <select class="form-control" formControlName="reporter">
+                    <option class="dropdown-item" *ngFor="let reporter of reporter">{{reporter}}</option>
+                </select>
+            </div>
+            <div class="col-3">
+                <label for="exampleFormControlSelect1">Status</label>
+                <select class="form-control" formControlName="status">
+                    <option class="dropdown-item" *ngFor="let status of status">{{status}}</option>
+                </select>
+            </div>
+            <div class="col-1">
+                <label ></label>
+                <button class="btn btn-success" style="margin-top: 5pt;">Shearch</button>
+            </div>
+          </div>
+      </form>
+</div>
+<br>
+<div class="row">
     <table class="table thead-light shadow">
         <thead class="table-dark text-center">
           <tr>

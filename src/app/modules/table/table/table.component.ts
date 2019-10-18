@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Table } from './table.model';
 import { DataService } from './data.service';
 import { Router } from '@angular/router';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 @Component({
   // tslint:disable-next-line: component-selector
@@ -12,11 +13,20 @@ import { Router } from '@angular/router';
 export class TableComponent implements OnInit {
 
   tableData: Table[];
+  shearchForm: FormGroup;
   titleOrderAsc: boolean;
   priorityOrderAsc: boolean;
   reporterOrderAsc: boolean;
   dateCreatedOrderAsc: boolean;
   statusOrderAsc: boolean;
+
+  status: any = ['Ready for test', 'Done', 'Rejected'];
+  reporter: any = ['QA', 'PO', 'DEV'];
+  priority: any = [
+    { id: 1, name : 'Minor'},
+    { id: 2, name : 'Major'},
+    { id: 3, name : 'Critical'}
+  ];
 
   constructor(private dataService: DataService, private router: Router) { }
 
@@ -26,6 +36,14 @@ export class TableComponent implements OnInit {
     this.dateCreatedOrderAsc = null;
     this.statusOrderAsc = null;
     this.titleOrderAsc = null;
+
+    this.shearchForm = new FormGroup({
+      title: new FormControl(''),
+      priority: new FormControl(''),
+      reporter: new FormControl(''),
+      status: new FormControl('')
+    });
+
     return this.dataService.getTable('').subscribe(data => this.tableData = data);
   }
 
@@ -38,7 +56,12 @@ export class TableComponent implements OnInit {
   }
   }
 
-  EditBugs(id: string){
+  onSubmit() {
+    console.log(this.shearchForm.value);
+
+  }
+
+  EditBugs(id: string) {
     this.router.navigate(['post', id]);
   }
 
