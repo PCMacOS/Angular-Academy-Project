@@ -6,4 +6,11 @@ export class Table {
   createdAt: string;
   status: string;
   description: string;
+  comments: [
+    {
+      _id: string;
+      reporter: string;
+      description: string;
+    }
+  ];
 }
