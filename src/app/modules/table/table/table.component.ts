@@ -19,6 +19,25 @@ export class TableComponent implements OnInit {
   reporterOrderAsc: boolean;
   dateCreatedOrderAsc: boolean;
   statusOrderAsc: boolean;
+
+  status: any = [
+    { id: '', name : 'All'},
+    { id: 'Ready for test', name : 'Ready for test'},
+    { id: 'Done', name : 'Done'},
+    { id: 'Rejected', name : 'Rejected'}
+  ];
+  reporter: any = [
+    { id: '', name : 'All'},
+    { id: 'QA', name : 'QA'},
+    { id: 'PO', name : 'PO'},
+    { id: 'DEV', name : 'DEV'}
+  ];
+  priority: any = [
+    { id: '', name : 'All'},
+    { id: 1, name : 'Minor'},
+    { id: 2, name : 'Major'},
+    { id: 3, name : 'Critical'}
+  ];
   order: number;
   viewSize: number;
 
