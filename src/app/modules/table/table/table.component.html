@@ -32,6 +32,17 @@
 </div>
 <br>
 <div class="row">
+    <div class="btn-group" role="group" aria-label="Basic example">
+      <button type="button" [disabled]="CheckIfPrevious()" (click)="Previous()" class="btn btn-dark">&lt;</button>
+      <button type="button" [disabled]="true" class="btn btn-dark">{{order}}</button>
+      <button type="button" [disabled]="CheckIfNext()" (click)="Next()" class="btn btn-dark">&gt;</button>
+      <input type="text" (keyup)="onKey($event)" class="text-center" style="max-width: 100px;" placeholder="View Size">
+      <button type="button" (click)="SetSize()" class="btn btn-info">Set Size</button>
+    </div>
+
+</div>
+
+<div class="row">
     <table class="table thead-light shadow">
         <thead class="table-dark text-center">
           <tr>

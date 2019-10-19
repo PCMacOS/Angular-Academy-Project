@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { FormGroup, FormControl, Validators, FormArray } from '@angular/forms';
 import { DataService } from '../table/data.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Table } from '../table/table.model';
+import { CommentBug } from '../table/comment.model';
 
 @Component({
   selector: 'angularAcademyProject-post-form',
@@ -28,6 +29,7 @@ export class PostFormComponent implements OnInit {
     { id: 3, name : 'Critical'}
   ];
   postForm: FormGroup;
+  commentForm: FormGroup;
   submitFlag;
   bugId: any;
   constructor(private dataService: DataService, private route: ActivatedRoute, private router: Router) { }
@@ -40,7 +42,16 @@ export class PostFormComponent implements OnInit {
       description: new FormControl('', Validators.required),
       priority: new FormControl('', Validators.required),
       reporter: new FormControl('', Validators.required),
-      status: new FormControl('', Validators.required)
+      status: new FormControl('', Validators.required),
+      comments: new FormGroup({
+        reporter: new FormControl(''),
+        description: new FormControl(''),
+      })
+    });
+
+    this.commentForm = new FormGroup({
+      description: new FormControl('', Validators.required),
+      reporter: new FormControl('', Validators.required)
     });
 
     this.route.paramMap.subscribe(params => {
@@ -58,6 +69,13 @@ export class PostFormComponent implements OnInit {
     else { this.dataService.updateBugs(this.bugId, this.postForm.value).subscribe(); }
     this.submitFlag = true;
     this.router.navigate(['']);
+  }
+
+  onSubmitComment() {
+    console.log(this.commentForm.value);
+    if (this.editFlag) {
+      this.dataService.addComment(this.bugId, this.commentForm.value).subscribe();
+    }
   }
 
   getBug(id: string) {
