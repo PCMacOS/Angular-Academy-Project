@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Table } from './table.model';
 import { Observable } from 'rxjs';
+import { CommentBug } from './comment.model';
 
 @Injectable({
   providedIn: 'root'
@@ -25,6 +26,10 @@ export class DataService {
   }
 
   updateBugs(id: string, bug: Table) {
+    return this._http.put(this.apiUrlRegular + '/' + id, bug);
+  }
+
+  addComment(id: string, bug: CommentBug) {
     return this._http.put(this.apiUrlRegular + '/' + id, bug);
   }
 }
