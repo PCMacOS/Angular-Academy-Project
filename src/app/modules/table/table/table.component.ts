@@ -19,25 +19,8 @@ export class TableComponent implements OnInit {
   reporterOrderAsc: boolean;
   dateCreatedOrderAsc: boolean;
   statusOrderAsc: boolean;
-
-  status: any = [
-    { id: '', name : 'All'},
-    { id: 'Ready for test', name : 'Ready for test'},
-    { id: 'Done', name : 'Done'},
-    { id: 'Rejected', name : 'Rejected'}
-  ];
-  reporter: any = [
-    { id: '', name : 'All'},
-    { id: 'QA', name : 'QA'},
-    { id: 'PO', name : 'PO'},
-    { id: 'DEV', name : 'DEV'}
-  ];
-  priority: any = [
-    { id: '', name : 'All'},
-    { id: 1, name : 'Minor'},
-    { id: 2, name : 'Major'},
-    { id: 3, name : 'Critical'}
-  ];
+  order: number;
+  viewSize: number;
 
   constructor(private dataService: DataService, private router: Router) { }
 
@@ -47,6 +30,8 @@ export class TableComponent implements OnInit {
     this.dateCreatedOrderAsc = null;
     this.statusOrderAsc = null;
     this.titleOrderAsc = null;
+    this.order = 0;
+    this.viewSize = 10;
 
     this.shearchForm = new FormGroup({
       title: new FormControl(''),
@@ -56,6 +41,30 @@ export class TableComponent implements OnInit {
     });
 
     return this.dataService.getTable('').subscribe(data => this.tableData = data);
+  }
+
+  onKey(event) {this.viewSize = event.target.value;}
+
+  Next() {
+    this.order++;
+    return this.dataService.getTable('?page=' + this.order + '&size=' + this.viewSize).subscribe(data => this.tableData = data);
+  }
+
+  SetSize() {
+    return this.dataService.getTable('?page=' + this.order + '&size=' + this.viewSize).subscribe(data => this.tableData = data);
+  }
+
+  Previous() {
+    this.order--;
+    return this.dataService.getTable('?page=' + this.order + '&size=' + this.viewSize).subscribe(data => this.tableData = data);
+  }
+
+  CheckIfPrevious() {
+    return this.order === 0;
+  }
+
+  CheckIfNext() {
+    return this.tableData.length < this.viewSize;
   }
 
   DeleteBugs(id: string, index: number){
