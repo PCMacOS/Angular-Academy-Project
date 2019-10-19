@@ -44,8 +44,8 @@ export class PostFormComponent implements OnInit {
       reporter: new FormControl('', Validators.required),
       status: new FormControl('', Validators.required),
       comments: new FormGroup({
-        reporter: new FormControl('', Validators.required),
-        description: new FormControl('', Validators.required),
+        reporter: new FormControl(''),
+        description: new FormControl(''),
       })
     });
 
